@@ -3,7 +3,8 @@ NLC - Internship
 
 # ABSTRACT
 
-**PURPOSE**  :	Internship training on “CONVEYOR MONITORING APPLICATION USING PYTHON”
+**PURPOSE**  :	Internship training on “CONVEYOR MONITORING APPLICATION USING PYTHON”  
+
 **VENUE**	   :	Administrative Office, Mine-I, Neyveli.
 
 The project focuses on the continuous monitoring of temperature and vibration in motors used in conveyor belts at a coal mine. The system collects real-time data, stores it in a MySQL database using XAMPP, and presents it through a user interface developed using HTML, CSS, JavaScript, and Node.js. Key objectives include ensuring motor health, and facilitating timely maintenance. The technology stack includes Arduino for sensor data acquisition, NodeMCU for data transmission, and Node.js for database connectivity.
