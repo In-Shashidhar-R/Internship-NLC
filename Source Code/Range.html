@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>NLC</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+    <!-- Favicons -->
+    <link href="Home Page\\NLCINDIA.png" rel="icon">
+    <link href="Home Page\\NLCINDIA.png" rel="apple-touch-icon">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="Vendor\\boostrap\\css\\bootstrap-grid.min.css" rel="stylesheet">
+    <link href="Vendor\\boostrap\\css\\bootstrap-icons.css" rel="stylesheet">
+    <link href="Vendor\\boostrap\\css\\boxicons.min.css" rel="stylesheet">
+    <link href="Vendor\\boostrap\\css\\glightbox.min.css" rel="stylesheet">
+    <link href="Vendor\\boostrap\\css\\remixicon.css" rel="stylesheet">
+    <link href="Vendor\\boostrap\\css\\swiper-bundle.min.css" rel="stylesheet">
+    <!-- Template Main CSS File -->
+    <link href="Vendor\\boostrap\\css\\style.css" rel="stylesheet">
+    <title>Temperature and Vibration Data</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        #dataContainer {
+            margin-top: 20px;
+        }
+        
+        #myChart {
+            margin-top: 20px;
+            max-width: 600px;
+        }
+        
+        .dropdown-content {
+            position: fixed;
+            background-color: #0a0a0a;
+            min-width: 150px;
+            color: rgb(240, 248, 255);
+            box-shadow: 0px 8px 16px 0px rgb(44, 44, 44);
+            z-index: 1000;
+            padding: 10px;
+        }
+        
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        
+        .dropdown-arrow {
+            position: absolute;
+            top: 45%;
+            left: 108%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-top: 5px solid hsl(0, 0%, 100%);
+            /* Adjust color as needed */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <br><br>
+        <h1>
+            <img style="height: 1em; margin-right: 5px;" src="Home Page\\NLCINDIA.png" alt="NLC Logo">
+            <a href="Index.html">NLC</a>
+        </h1>
+        <nav id="navbar" class="navbar">
+            <ul>
+                <li><a class="nav-link active" href="Index.html">Home</a></li>
+                <li><a class="nav-link" href="About.html">About</a></li>
+                <!-- Dropdown for Dashboard -->
+                <li class="dropdown">
+                    <a href="#" class="nav-link">Dashboard <i class="fa fa-caret-down"></i></a>
+                    <div class="dropdown-content">
+                        <a href="Range.html">Range</a>
+                        <a href="Date.html">Date Range</a>
+                    </div>
+                    <span class="dropdown-arrow"></span>
+                </li>
+            </ul>
+            <i class="fa fa-caret-down mobile-nav-toggle"></i>
+        </nav>
+        <br>
+        <br>
+        <div class="section-title">
+            <h2>Range Of Temperature and Vibration</h2>
+        </div>
+        <br>
+        <table>
+            <tr>
+                <th>S.No</th>
+                <th>Temperature</th>
+                <th>Condition</th>
+            </tr>
+            <tr>
+                <td>1.</td>
+                <td>24 and below</td>
+                <td>Good</td>
+            </tr>
+            <tr>
+                <td>2.</td>
+                <td>25 - 35</td>
+                <td>Normal</td>
+            </tr>
+            <tr>
+                <td>3.</td>
+                <td>36 and above</td>
+                <td>Abnormal</td>
+            </tr>
+        </table>
+        <br><br>
+        <table>
+            <tr>
+                <th>S.No</th>
+                <th>Vibration</th>
+                <th>Condition</th>
+            </tr>
+            <tr>
+                <td>1.</td>
+                <td>below 50 Hz</td>
+                <td>Good</td>
+            </tr>
+            <tr>
+                <td>2.</td>
+                <td>10 Hz to 150 Hz</td>
+                <td>Normal</td>
+            </tr>
+            <tr>
+                <td>3.</td>
+                <td>150Hz and above</td>
+                <td>Abnormal</td>
+            </tr>
+        </table>
+        <br><br>
+    </div>
+
+    <script src="Vendor\\JS Files\\main.js"></script>
+
+    <!-- End Contact Section -->
+    <!-- Vendor JS Files -->
+    <script src="Vendor\\JS Files\\purecounter.js"></script>
+    <script src="Vendor\\JS Files\\bootstrap.bundle.min.js"></script>
+    <script src="Vendor\\JS Files\\glightbox.min.js"></script>
+    <script src="Vendor\\JS Files\\isotope.pkgd.min.js"></script>
+    <script src="Vendor\\JS Files\\swiper-bundle.min.js"></script>
+    <script src="Vendor\\JS Files\\noframework.waypoints.js"></script>
+    <script src="Vendor\\JS Files\\validate.js"></script>
+    <!-- Template Main JS File -->
+    <script src="Vendor\\JS Files\\main.js"></script>
+    </section>
+    </section>
+</body>
+
+</html>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const dropdowns = document.querySelectorAll(".dropdown");
+        dropdowns.forEach((dropdown) => {
+            dropdown.addEventListener("mouseenter", function() {
+                this.querySelector(".dropdown-content").style.display = "block";
+            });
+            dropdown.addEventListener("mouseleave", function() {
+                this.querySelector(".dropdown-content").style.display = "none";
+            });
+        });
+    });
+</script>

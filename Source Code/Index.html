@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>NLC</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+    <link href="Home Page\\NLCINDIA.png" rel="icon">
+    <link href="Home Page\\NLCINDIA.png" rel="apple-touch-icon">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <link href="Vendor\\boostrap\\css\\bootstrap-grid.min.css" rel="stylesheet">
+    <link href="Vendor\\boostrap\\css\\bootstrap-icons.css" rel="stylesheet">
+    <link href="Vendor\\boostrap\\css\\boxicons.min.css" rel="stylesheet">
+    <link href="Vendor\\boostrap\\css\\glightbox.min.css" rel="stylesheet">
+    <link href="Vendor\\boostrap\\css\\remixicon.css" rel="stylesheet">
+    <link href="Vendor\\boostrap\\css\\swiper-bundle.min.css" rel="stylesheet">
+    <!-- Template Main CSS File -->
+    <link href="Vendor\\boostrap\\css\\style.css" rel="stylesheet">
+    <title>Temperature and Vibration Data</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        #dataContainer {
+            margin-top: 20px;
+        }
+        
+        #myChart {
+            margin-top: 20px;
+            max-width: 600px;
+        }
+        
+        .dropdown-content {
+            position: fixed;
+            background-color: #0a0a0a;
+            min-width: 150px;
+            color: rgb(240, 248, 255);
+            box-shadow: 0px 8px 16px 0px rgb(44, 44, 44);
+            z-index: 1000;
+            padding: 10px;
+        }
+        
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        
+        .dropdown-arrow {
+            position: absolute;
+            top: 45%;
+            left: 108%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-top: 5px solid hsl(0, 0%, 100%);
+            /* Adjust color as needed */
+        }
+    </style>
+</head>
+
+<body>
+    <!-- ======= Header ======= -->
+    <header id="header">
+        <div class="container">
+            <h1>
+                <img style="height: 1em; margin-right: 5px;" src="Home Page\\NLCINDIA.png" alt="NLC Logo">
+                <a href="Index.html">NLC</a>
+            </h1>
+            <h2>Internship in <span> NLC India Limited</span> April - May 2024</h2>
+            <nav id="navbar" class="navbar">
+                <ul>
+                    <li><a class="nav-link active" href="Index.html">Home</a></li>
+                    <li><a class="nav-link" href="About.html">About</a></li>
+                    <!-- Dropdown for Dashboard -->
+                    <li class="dropdown">
+                        <a href="#" class="nav-link">Dashboard <i class="fa fa-caret-down"></i></a>
+                        <div class="dropdown-content">
+                            <a href="Range.html">Range</a>
+                            <a href="Date.html">Date Range</a>
+                        </div>
+                        <span class="dropdown-arrow"></span>
+                    </li>
+                </ul>
+                <i class="fa fa-caret-down mobile-nav-toggle"></i>
+            </nav>
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.0/font/bootstrap-icons.css" rel="stylesheet">
+            <div class="social-links">
+                <a href="https://www.instagram.com/nlcindialtd/?hl=en" class="instagram" target="_blank"><i class="bi bi-instagram"></i></a>
+                <a href="https://www.linkedin.com/company/nlc-india-limited/?originalSubdomain=in" class="linkedin" target="_blank"><i class="bi bi-linkedin"></i></a>
+                <a href="https://twitter.com/nlcindialimited?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor" class="Github" target="_blank"><i class="bi bi-twitter"></i></a>
+            </div>
+        </div>
+    </header>
+
+    <script src="Vendor\\JS Files\\main.js"></script>
+
+    <!-- End Contact Section -->
+    <!-- Vendor JS Files -->
+    <script src="Vendor\\JS Files\\purecounter.js"></script>
+    <script src="Vendor\\JS Files\\bootstrap.bundle.min.js"></script>
+    <script src="Vendor\\JS Files\\glightbox.min.js"></script>
+    <script src="Vendor\\JS Files\\isotope.pkgd.min.js"></script>
+    <script src="Vendor\\JS Files\\swiper-bundle.min.js"></script>
+    <script src="Vendor\\JS Files\\noframework.waypoints.js"></script>
+    <script src="Vendor\\JS Files\\validate.js"></script>
+    <!-- Template Main JS File -->
+    <script src="Vendor\\JS Files\\main.js"></script>
+    </section>
+    </section>
+</body>
+
+</html>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const dropdowns = document.querySelectorAll(".dropdown");
+        dropdowns.forEach((dropdown) => {
+            dropdown.addEventListener("mouseenter", function() {
+                this.querySelector(".dropdown-content").style.display = "block";
+            });
+            dropdown.addEventListener("mouseleave", function() {
+                this.querySelector(".dropdown-content").style.display = "none";
+            });
+        });
+    });
+</script>

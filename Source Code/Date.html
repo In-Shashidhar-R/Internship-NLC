@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>NLC</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+    <!-- Favicons -->
+    <link href="Home Page\\NLCINDIA.png" rel="icon">
+    <link href="Home Page\\NLCINDIA.png" rel="apple-touch-icon">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="Vendor\\boostrap\\css\\bootstrap-grid.min.css" rel="stylesheet">
+    <link href="Vendor\\boostrap\\css\\bootstrap-icons.css" rel="stylesheet">
+    <link href="Vendor\\boostrap\\css\\boxicons.min.css" rel="stylesheet">
+    <link href="Vendor\\boostrap\\css\\glightbox.min.css" rel="stylesheet">
+    <link href="Vendor\\boostrap\\css\\remixicon.css" rel="stylesheet">
+    <link href="Vendor\\boostrap\\css\\swiper-bundle.min.css" rel="stylesheet">
+    <!-- Template Main CSS File -->
+    <link href="Vendor\\boostrap\\css\\style.css" rel="stylesheet">
+    <title>Temperature and Vibration Data</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        #dataContainer {
+            margin-top: 20px;
+        }
+        
+        #temperatureChart,
+        #vibrationChart {
+            margin-top: 20px;
+            max-width: 600px;
+        }
+        
+        .chart-container {
+            margin-bottom: 20px;
+        }
+        
+        .chart-container canvas {
+            border: 1px solid #ddd;
+            background-color: #ffff;
+            border-radius: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .chart-container {
+            position: relative;
+        }
+        
+        .dropdown-content {
+            position: fixed;
+            background-color: #0a0a0a;
+            min-width: 150px;
+            color: rgb(240, 248, 255);
+            box-shadow: 0px 8px 16px 0px rgb(44, 44, 44);
+            z-index: 1000;
+            padding: 10px;
+        }
+        
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        
+        .dropdown-arrow {
+            position: absolute;
+            top: 45%;
+            left: 108%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-top: 5px solid hsl(0, 0%, 100%);
+            /* Adjust color as needed */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <br><br>
+        <h1>
+            <img style="height: 1em; margin-right: 5px;" src="Home Page\\NLCINDIA.png" alt="NLC Logo">
+            <a href="Index.html">NLC</a>
+        </h1>
+        <nav id="navbar" class="navbar">
+            <ul>
+                <li><a class="nav-link active" href="Index.html">Home</a></li>
+                <li><a class="nav-link" href="About.html">About</a></li>
+                <!-- Dropdown for Dashboard -->
+                <li class="dropdown">
+                    <a href="#" class="nav-link">Dashboard <i class="fa fa-caret-down"></i></a>
+                    <div class="dropdown-content">
+                        <a href="Range.html">Range</a>
+                        <a href="Date.html">Date Range</a>
+                    </div>
+                    <span class="dropdown-arrow"></span>
+                </li>
+            </ul>
+            <i class="fa fa-caret-down mobile-nav-toggle"></i>
+        </nav>
+        <br>
+        <br>
+        <br>
+        <div class="section-title">
+            <h2 style="font-size: 20px; color: white;">Date Range</h2>
+        </div>
+        <br><br>
+        <form id="dateForm">
+            Start Date: <input type="date" id="startDate" required><br>
+            <br> End Date: <input type="date" id="endDate" required><br>
+            <br><br>
+            <button type="submit">Fetch Data</button>
+        </form>
+        <br><br>
+        <!-- Space for displaying the date -->
+        <div id="dateDisplay"></div>
+        <div id="dataContainer"></div>
+        <div id="paginationContainer"></div>
+        <br><br>
+        <div class="section-title">
+            <h2 style="font-size: 20px; color: white;">Graphical representation</h2>
+        </div>
+        <br>
+
+        <div class="chart-container">
+            <canvas id="temperatureChart"></canvas>
+        </div>
+
+        <div class="chart-container">
+            <canvas id="vibrationChart"></canvas>
+        </div>
+
+        <script>
+            // Define variables for pagination
+            let currentPage = 1;
+            const pageSize = 10; // Number of items per page
+
+            document.getElementById('dateForm').addEventListener('submit', function(event) {
+                event.preventDefault();
+                const startDateInput = document.getElementById('startDate');
+                const endDateInput = document.getElementById('endDate');
+
+                // Function to format date as YYYY-MM-DD
+                function formatDate(date) {
+                    const year = date.getFullYear();
+                    const month = String(date.getMonth() + 1).padStart(2, '0');
+                    const day = String(date.getDate()).padStart(2, '0');
+                    return `${year}-${month}-${day}`;
+                }
+
+                // Get the values from input fields and format them
+                const startDate = formatDate(new Date(startDateInput.value));
+                const endDate = formatDate(new Date(endDateInput.value));
+
+                fetch(`http://localhost:3000/api/data/${startDate}/${endDate}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        // Process fetched data and update UI
+                        updateTable(data);
+                        // Update pagination controls
+                        updatePaginationControls(data.length);
+                        // Generate Temperature Chart
+                        generateChart('temperatureChart', 'Temperature', data.map(entry => entry.Time), data.map(entry => entry.TemperatureL), data.map(entry => entry.TemperatureR), calculateAverage(data.map(entry => entry.TemperatureL)), calculateAverage(data.map(entry => entry.TemperatureR)));
+                        // Generate Vibration Chart
+                        generateChart('vibrationChart', 'Vibration', data.map(entry => entry.Time), data.map(entry => entry.VibrationL), data.map(entry => entry.VibrationR), calculateAverage(data.map(entry => entry.VibrationL)), calculateAverage(data.map(entry => entry.VibrationR)));
+                    })
+                    .catch(error => {
+                        console.error('Error fetching data:', error);
+                        const dataContainer = document.getElementById('dataContainer');
+                        dataContainer.textContent = 'An error occurred while fetching data.';
+                    });
+            });
+
+            // Function to update pagination controls based on total number of rows
+            function updatePaginationControls(totalRows) {
+                const totalPages = Math.ceil(totalRows / pageSize);
+                console.log('Total Pages:', totalPages);
+
+                const paginationContainer = document.getElementById('paginationContainer');
+                paginationContainer.innerHTML = '';
+
+                // Create Previous button
+                const prevButton = document.createElement('button');
+                prevButton.textContent = 'Previous';
+                prevButton.disabled = currentPage === 1;
+                prevButton.addEventListener('click', () => {
+                    if (currentPage > 1) {
+                        currentPage--;
+                        fetchDataForPage(currentPage);
+                    }
+                });
+                paginationContainer.appendChild(prevButton);
+                console.log('Previous Button Created');
+
+                // Create page number buttons
+                for (let i = 1; i <= totalPages; i++) {
+                    const pageButton = document.createElement('button');
+                    pageButton.textContent = i;
+                    pageButton.addEventListener('click', () => {
+                        currentPage = i;
+                        fetchDataForPage(currentPage);
+                    });
+                    paginationContainer.appendChild(pageButton);
+                    console.log('Page Button Created:', i);
+                }
+
+                // Create Next button
+                const nextButton = document.createElement('button');
+                nextButton.textContent = 'Next';
+                nextButton.disabled = currentPage === totalPages;
+                nextButton.addEventListener('click', () => {
+                    if (currentPage < totalPages) {
+                        currentPage++;
+                        fetchDataForPage(currentPage);
+                    }
+                });
+                paginationContainer.appendChild(nextButton);
+                console.log('Next Button Created');
+            }
+
+            // Function to fetch data for a specific page
+            function fetchDataForPage(page) {
+                // Calculate the start index and end index for the page
+                const startIndex = (page - 1) * pageSize;
+                const endIndex = startIndex + pageSize;
+
+                // Fetch data from the server for the specified range
+                fetch(`Give Your EndPoint Link Over here`)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Failed to fetch data');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        // Process fetched data and update UI
+                        updateTable(data);
+                    })
+                    .catch(error => {
+                        console.error('Error fetching data:', error);
+                        const dataContainer = document.getElementById('dataContainer');
+                        dataContainer.textContent = 'An error occurred while fetching data.';
+                    });
+            }
+
+            function updateTable(data) {
+                const dataContainer = document.getElementById('dataContainer');
+                dataContainer.innerHTML = '';
+
+                // Create table
+                const table = document.createElement('table');
+                const headerRow = table.insertRow();
+                ['Date', 'Time', 'TemperatureL', 'VibrationL', 'TemperatureR', 'VibrationR'].forEach(headerText => { // Include 'Date' in the header
+                    const header = document.createElement('th');
+                    header.textContent = headerText;
+                    headerRow.appendChild(header);
+                });
+
+                // Populate table with data
+                data.forEach(entry => {
+                    const row = table.insertRow();
+                    // Include 'Date' in the data and format it
+                    const dateCell = row.insertCell();
+                    const utcDate = new Date(entry['Date']);
+                    const formattedDate = `${utcDate.getUTCFullYear()}-${(utcDate.getUTCMonth() + 1).toString().padStart(2, '0')}-${(utcDate.getUTCDate() + 1).toString().padStart(2, '0')}`;
+                    dateCell.textContent = formattedDate;
+                    // Include other data fields
+                    ['Time', 'TemperatureL', 'VibrationL', 'TemperatureR', 'VibrationR'].forEach(key => {
+                        const cell = row.insertCell();
+                        cell.textContent = entry[key];
+                    });
+                });
+
+                dataContainer.appendChild(table);
+            }
+
+
+
+            function generateChart(canvasId, label, labels, dataL, dataR, avgL, avgR) {
+                var ctx = document.getElementById(canvasId).getContext('2d');
+                var chart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: label + ' Left',
+                            data: dataL,
+                            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                            borderColor: 'rgba(255, 99, 132, 1)',
+                            borderWidth: 1
+                        }, {
+                            label: label + ' Right',
+                            data: dataR,
+                            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                            borderColor: 'rgba(54, 162, 235, 1)',
+                            borderWidth: 1
+                        }, {
+                            label: 'Average ' + label + ' Left',
+                            data: Array(labels.length).fill(avgL),
+                            borderColor: 'rgba(255, 99, 132, 0.5)',
+                            borderWidth: 1,
+                            borderDash: [5, 5],
+                            fill: false,
+                            hidden: true
+                        }, {
+                            label: 'Average ' + label + ' Right',
+                            data: Array(labels.length).fill(avgR),
+                            borderColor: 'rgba(54, 162, 235, 0.5)',
+                            borderWidth: 1,
+                            borderDash: [5, 5],
+                            fill: false,
+                            hidden: true
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            }
+
+            function calculateAverage(data) {
+                const sum = data.reduce((acc, curr) => acc + curr, 0);
+                return sum / data.length;
+            }
+        </script>
+    </div>
+
+    <script src="C:\\Users\\INFINIX\\Desktop\\Study\\Projects\\NLC - Internship April - May 2024\\25 - 04 - 2024\\Vendor\\JS Files\\usage.js"></script>
+
+    <script src="Vendor\\JS Files\\main.js"></script>
+
+    <!-- End Contact Section -->
+    <!-- Vendor JS Files -->
+    <script src="Vendor\\JS Files\\purecounter.js"></script>
+    <script src="Vendor\\JS Files\\bootstrap.bundle.min.js"></script>
+    <script src="Vendor\\JS Files\\glightbox.min.js"></script>
+    <script src="Vendor\\JS Files\\isotope.pkgd.min.js"></script>
+    <script src="Vendor\\JS Files\\swiper-bundle.min.js"></script>
+    <script src="Vendor\\JS Files\\noframework.waypoints.js"></script>
+    <script src="Vendor\\JS Files\\validate.js"></script>
+    <!-- Template Main JS File -->
+    <script src="Vendor\\JS Files\\main.js"></script>
+    </section>
+    </section>
+</body>
+
+</html>

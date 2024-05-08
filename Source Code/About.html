@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>NLC</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+    <!-- Favicons -->
+    <link href="Home Page\\NLCINDIA.png" rel="icon">
+    <link href="Home Page\\NLCINDIA.png" rel="apple-touch-icon">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="Vendor\\boostrap\\css\\bootstrap-grid.min.css" rel="stylesheet">
+    <link href="Vendor\\boostrap\\css\\bootstrap-icons.css" rel="stylesheet">
+    <link href="Vendor\\boostrap\\css\\boxicons.min.css" rel="stylesheet">
+    <link href="Vendor\\boostrap\\css\\glightbox.min.css" rel="stylesheet">
+    <link href="Vendor\\boostrap\\css\\remixicon.css" rel="stylesheet">
+    <link href="Vendor\\boostrap\\css\\swiper-bundle.min.css" rel="stylesheet">
+    <!-- Template Main CSS File -->
+    <link href="Vendor\\boostrap\\css\\style.css" rel="stylesheet">
+    <title>Temperature and Vibration Data</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        #dataContainer {
+            margin-top: 20px;
+        }
+        
+        #myChart {
+            margin-top: 20px;
+            max-width: 600px;
+        }
+        
+        .dropdown-content {
+            position: fixed;
+            background-color: #0a0a0a;
+            min-width: 150px;
+            color: rgb(240, 248, 255);
+            box-shadow: 0px 8px 16px 0px rgb(44, 44, 44);
+            z-index: 1000;
+            padding: 10px;
+        }
+        
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        
+        .dropdown-arrow {
+            position: absolute;
+            top: 45%;
+            left: 108%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-top: 5px solid hsl(0, 0%, 100%);
+            /* Adjust color as needed */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <br><br>
+        <h1>
+            <img style="height: 1em; margin-right: 5px;" src="Home Page\\NLCINDIA.png" alt="NLC Logo">
+            <a href="Index.html">NLC</a>
+        </h1>
+        <nav id="navbar" class="navbar">
+            <ul>
+                <li><a class="nav-link active" href="Index.html">Home</a></li>
+                <li><a class="nav-link" href="About.html">About</a></li>
+                <!-- Dropdown for Dashboard -->
+                <li class="dropdown">
+                    <a href="#" class="nav-link">Dashboard <i class="fa fa-caret-down"></i></a>
+                    <div class="dropdown-content">
+                        <a href="Range.html">Range</a>
+                        <a href="Date.html">Date Range</a>
+                    </div>
+                    <span class="dropdown-arrow"></span>
+                </li>
+            </ul>
+            <i class="fa fa-caret-down mobile-nav-toggle"></i>
+        </nav>
+        <br>
+        <br>
+        <!-- ======= About Me ======= -->
+        <div class="about-me container">
+            <br>
+            <div class="section-title">
+                <h2 style="font-size: 20px; color: white;">About</h2>
+            </div>
+            <div class="about-content">
+                <p>The efficient operation of conveyor belts in coal mines is paramount for uninterrupted material transportation. Ensuring the health and performance of the motors powering these conveyor belts is crucial for maintaining productivity and
+                    safety standards. This project presents a real-time monitoring and anomaly detection system designed specifically for monitoring motor vibration and temperature in coal mine conveyor belts located in Neyveli. By analyzing patterns
+                    and deviations from normal behavior, the system can identify abnormal vibrations and temperature variations in the motors, signaling potential faults or impending failures. To provide actionable insights to mine operators and maintenance
+                    personnel, the system incorporates a user-friendly interface for visualization and alerts. Through a combination of graphical representations and notifications, operators can promptly respond to detected anomalies, thereby preventing
+                    costly downtimes and enhancing operational efficiency.</p>
+                <br>
+                <p>Overall, the proposed monitoring and anomaly detection system offer a proactive approach to motor health management in coal mine conveyor belts, ensuring continuous operation, mitigating risks, and enhancing overall safety and productivity
+                    in Neyveli coal mines.</p>
+            </div>
+            <br><br><br>
+            <!-- Methodology -->
+            <div class="section-title">
+                <h2 style="font-size: 20px; color: white;">Sensors And Methodology</h2>
+            </div>
+            <br><br>
+            <div class="about-content">
+                <div class="image-container" style="text-align: center;">
+                    <img src="Images\\Sensor\\Vibration.jpg" alt="Image 1" style="width: 15%;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <img src="Images\\Sensor\\Temperature.jpg" alt="Image 2" style="width: 29%;">
+                </div>
+                <br>
+                <div class="caption">
+                    <p style="text-align: center;">Temperature Sensor And Vibration Sensor</p>
+                </div>
+                <br><br>
+                <h2>SW-420 vibration sensor</h2>
+                <br>
+                <ul>
+                    <li>The SW-420 vibration sensor is a commonly used module for detecting vibrations. It typically consists of a spring-mounted sensor and a conductive metal mass</li>
+                    <li>When vibrations occur, the mass moves, causing the spring to compress or expand and triggering a change in electrical resistance.</li>
+                    <li>This change can be measured using an analog or digital input, making it useful for various applications such as burglar alarms, earthquake detectors, and motion-activated lighting systems</li>
+                </ul>
+                <br><br>
+                <h2>DHT11 temperature sensor</h2>
+                <br>
+                <ul>
+                    <li>The DHT11 temperature sensor can be used to measure the ambient temperature in a room or space where appliances are located.</li>
+                    <li>By placing the sensor near the appliances, you can monitor the temperature to ensure they are operating within safe limits. </li>
+                    <li>Additionally, if you're interested in monitoring the temperature of specific appliances, you can place the sensor closer to them to get more accurate readings.</li>
+                    <li>This can be useful for detecting overheating or ensuring optimal operating conditions for appliances like refrigerators, ovens, or electronic devices.</li>
+                </ul>
+                <br><br>
+                <h2>Methodology</h2>
+                <br>
+                <p>The methodology employed in this research involves the deployment of SW-420 vibration sensor and The DHT11 temperature sensor on the motors powering the conveyor belts in Neyveli coal mines. Data collection is performed in real-time, with
+                    sensors continuously monitoring vibration patterns and temperature variations. The collected data is processed using signal processing algorithms to detect anomalies indicative of motor health issues. Graphical representations, such
+                    as time-series plots and trend analyses, are utilized to visualize the sensor data and highlight abnormal patterns. Additionally, the system incorporates a user-friendly interface for operators, actionable insights based on the analyzed
+                    data. The methodology emphasizes a proactive approach to motor health monitoring, enabling timely interventions and preventive maintenance measures.</p>
+                <br><br>
+            </div>
+
+            <br>
+            <!-- Project Outcome -->
+            <div class="section-title">
+                <h2 style="font-size: 20px; color: white;">Project Outcome</h2>
+            </div>
+            <div class="about-content">
+                <p>The research outcomes demonstrate the effectiveness of the real-time monitoring and anomaly detection system in identifying motor health issues in coal mine conveyor belts. The system successfully detects abnormal vibrations and temperature
+                    deviations, signaling potential faults or impending failures in the motors. Through graphical representations and real-time alerts, operators can promptly respond to these anomalies, minimizing downtime and optimizing motor performance.</p>
+                <br>
+                <p>The proactive approach facilitated by the system enhances operational efficiency, mitigates risks associated with motor failures, and contributes to overall safety and productivity in Neyveli coal mines. These outcomes underscore the practical
+                    significance of implementing advanced monitoring solutions for motor health management in industrial settings.</p>
+            </div>
+            <br><br>
+            <!-- Project Outcome -->
+            <div class="section-title">
+                <h2 style="font-size: 20px; color: white;">Contributers</h2>
+            </div>
+            <div class="image-container" style="text-align: center;">
+                <br><br>
+                <img src="Images\\Contributers\\1.png" alt="Contributers 1" style="width: 20%; height:20%"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <img src="Images\\Contributers\\2.jpg" alt="Contributers 2" style="width: 20%; height:20%;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <img src="Images\\Contributers\\3.jpg" alt="Contributers 3" style="width: 20%; height:20%;">
+            </div>
+        </div>
+        <!-- End Project Outcome -->
+        <script src="Vendor\\Javascript\\main.js"></script>
+
+        <!-- End Contact Section -->
+        <!-- Vendor Javascript -->
+        <script src="Vendor\\Javascript\\purecounter.js"></script>
+        <script src="Vendor\\Javascript\\bootstrap.bundle.min.js"></script>
+        <script src="Vendor\\Javascript\\glightbox.min.js"></script>
+        <script src="Vendor\\Javascript\\isotope.pkgd.min.js"></script>
+        <script src="Vendor\\Javascript\\swiper-bundle.min.js"></script>
+        <script src="Vendor\\Javascript\\noframework.waypoints.js"></script>
+        <script src="Vendor\\Javascript\\validate.js"></script>
+        <!-- Template Main JS File -->
+        <script src="Vendor\\Javascript\\main.js"></script>
+        </section>
+        </section>
+</body>
+
+</html>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const dropdowns = document.querySelectorAll(".dropdown");
+        dropdowns.forEach((dropdown) => {
+            dropdown.addEventListener("mouseenter", function() {
+                this.querySelector(".dropdown-content").style.display = "block";
+            });
+            dropdown.addEventListener("mouseleave", function() {
+                this.querySelector(".dropdown-content").style.display = "none";
+            });
+        });
+    });
+</script>
