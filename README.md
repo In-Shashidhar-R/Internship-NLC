@@ -20,8 +20,6 @@ To create beautiful web designs with HTML, CSS, and JavaScript, build powerful b
 
 ![WhatsApp Image 2024-05-04 at 13 29 22_2ec61e4d](https://github.com/In-Shashidhar-R/Internship/assets/127376016/a7b39851-cf8b-4b57-b480-181521722ffd)
 
-![WhatsApp Image 2024-05-04 at 13 29 38_cdd92776](https://github.com/In-Shashidhar-R/Internship/assets/127376016/101ead56-1cfc-4870-9b59-fc97d4b52ab4)
-
 ![WhatsApp Image 2024-05-04 at 13 29 59_3990b6ad](https://github.com/In-Shashidhar-R/Internship/assets/127376016/522964a5-5d4b-4052-83ca-01bfa72b85b4)
 
 ![WhatsApp Image 2024-05-04 at 13 30 13_741ae9e9](https://github.com/In-Shashidhar-R/Internship/assets/127376016/16cae52d-690b-4c70-8c2c-5ae7febc0c19)
